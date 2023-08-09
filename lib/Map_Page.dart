@@ -11,7 +11,7 @@ class MapPage extends StatefulWidget {
 
 class _MapPageState extends State<MapPage> {
   // Set your Google Maps API key here
-  final String apiKey = 'AIzaSyDOmT3IuWcOq87wl4fUXlMDotiiJE2gzYw';
+  final String apiKey = ''
 
   // Create a GoogleMapController object
   late GoogleMapController mapController;
@@ -20,42 +20,42 @@ class _MapPageState extends State<MapPage> {
   LatLng _center = LatLng(9.1450, 40.4897);
 
   // Create a function to fetch the latitude and longitude from the database
-  Future<void> _fetchLocationFromDatabase(String ID) async {
-    // Construct the URL for the query based on the ID parameter
-    final url = 'https://ethiotravelapp.000webhostapp.com/place/index.php?id=$ID';
-
-    try {
-      // Make a request to your database and receive the data as a JSON object
-      final response = await http.get(Uri.parse(url));
-
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-
-        // Extract the latitude and longitude as doubles
-        final latitude = data['LATITUDE'].toDouble();
-        final longitude = data['LONGITUDE'].toDouble();
-
-        // Update the _center variable with the new latitude and longitude
-        setState(() {
-          _center = LatLng(latitude, longitude);
-        });
-
-        // Animate the camera to the new location
-        mapController.animateCamera(CameraUpdate.newCameraPosition(
-          CameraPosition(
-            target: _center,
-            zoom: 15.0,
-          ),
-        ));
-      } else {
-        // handle error
-        print('Error: ${response.statusCode}');
-      }
-    } catch (e) {
-      // handle error
-      print('Error: $e');
-    }
-  }
+  // Future<void> _fetchLocationFromDatabase(String ID) async {
+  //   // Construct the URL for the query based on the ID parameter
+  //   final url = 'https://ethiotravelapp.000webhostapp.com/place/index.php?id=$ID';
+  //
+  //   try {
+  //     // Make a request to your database and receive the data as a JSON object
+  //     final response = await http.get(Uri.parse(url));
+  //
+  //     if (response.statusCode == 200) {
+  //       final data = jsonDecode(response.body);
+  //
+  //       // Extract the latitude and longitude as doubles
+  //       final latitude = data['LATITUDE'].toDouble();
+  //       final longitude = data['LONGITUDE'].toDouble();
+  //
+  //       // Update the _center variable with the new latitude and longitude
+  //       setState(() {
+  //         _center = LatLng(latitude, longitude);
+  //       });
+  //
+  //       // Animate the camera to the new location
+  //       mapController.animateCamera(CameraUpdate.newCameraPosition(
+  //         CameraPosition(
+  //           target: _center,
+  //           zoom: 15.0,
+  //         ),
+  //       ));
+  //     } else {
+  //       // handle error
+  //       print('Error: ${response.statusCode}');
+  //     }
+  //   } catch (e) {
+  //     // handle error
+  //     print('Error: $e');
+  //   }
+  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,7 +87,7 @@ class _MapPageState extends State<MapPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // Fetch the latitude and longitude of the 12th place in the database
-          _fetchLocationFromDatabase(12.toString());
+          //_fetchLocationFromDatabase(14.toString());
         },
         child: Icon(Icons.location_searching),
       ),
